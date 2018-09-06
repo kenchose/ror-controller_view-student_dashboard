@@ -1,0 +1,38 @@
+<h2>Add a student</h2>
+
+<% if @student.errors.any? %>
+    <% @student.errors.full_messages.each do |msg| %>
+        <p><%= msg %></p>
+    <% end %>
+<% end %>
+
+
+<form action="/dojos/<%= @dojo.id %>/students" method="post">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <p>
+        <label for="first_name">First name:</label>
+        <input type="text" name="student[first_name]">
+    </p>
+    <p>
+        <label for="last_name">Last name:</label>
+        <input type="text" name="student[last_name]">
+    </p>
+    <p>
+        <label for="email">Email address:</label>
+        <input type="email" name="student[email]">
+    </p>
+    <p>
+        <label for="branch">Dojo Branch:</label>
+        <select name="student[dojo_id]">
+            <% @dojos.each do |dojo| %>
+                <% if dojo.id.to_i  == params[:dojo_id].to_i  %>
+                    <option value="<%= dojo.id %>" selected><%= dojo.branch %></option>
+                <% else %>
+                    <option value="<%= dojo.id %>"><%= dojo.branch %></option>
+                <% end %>
+            <% end %>
+        </select>
+    </p>        
+    <input type="submit" value="Add student">
+</form>
+<a href="/dojos">Home</a> | <a href="/dojos/<%= @dojo.id %>"><%= @dojo.branch %></a> 

@@ -1,0 +1,27 @@
+<h2>Create a new Dojo</h2>
+<% if @dojo.errors.any? %>
+    <% @dojo.errors.full_messages.each do |msg| %>
+        <h3><p><%= msg %></p></h3>
+    <% end %>
+<% end %>
+<form action="/dojos" method="post">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <p>
+        <label for="branch">Branch:</label>
+        <input type="text" name="dojo[branch]">
+    </p>
+    <p>
+        <label for="street">Street:</label>
+        <input type="text" name="dojo[street]">
+    </p>
+    <p>
+        <label for="city">City:</label>
+        <input type="text" name="dojo[city]">
+    </p>
+    <p>
+        <label for="state">State:</label>
+        <input type="text" name="dojo[state]">
+    </p>
+    <input type="submit" value="Create Dojo">
+</form>
+<a href="/dojos">Go back</a>
